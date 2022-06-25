@@ -50,7 +50,21 @@ function Main() {
     }
     function handleSubmit(e) {
         e.preventDefault();
+        const { meanDiameterOfCoil, diameterOfWire, noOfActiveCoils, freeLength, pitch, qty } = e.target.elements;
+
+        let data = {};
+        data['meanDiameterOfCoil'] = meanDiameterOfCoil.value;
+        data['diameterOfWire'] = diameterOfWire.value;
+        data['noOfActiveCoils'] = noOfActiveCoils.value;
+        data['freeLength'] = freeLength.value;
+        data['pitch'] = pitch.value;
+        data['qty'] = qty.value;
+        console.log(data);
+
+
     }
+
+
 
 
     return (
@@ -102,29 +116,33 @@ function Main() {
                 </div>
                 <Modal show={showSpring} onHide={handleCloseSpring} className="data-modal">
                     <Modal.Header closeButton className='modal-heading'>
-                        <p style={{ fontSize: "25px" }}>Helical Spring</p>
+                        <p style={{ fontSize: "20px" }}>{`Helical Spring Parameters (mm)`}</p>
                     </Modal.Header>
                     <Modal.Body className='modal-body'>
                         <form className="modal-form" autoComplete="off" onSubmit={handleSubmit}>
                             <div className='modal-input-wrapper'>
-                                <p className='modal-input-label'>Mean Diameter of Coil</p>
-                                <input type="text" autoComplete="off" required className="modal-input" />
+                                <p className='modal-input-label'>Mean diameter of coil</p>
+                                <input name="meanDiameterOfCoil" type="text" autoComplete="off" required className="modal-input" />
                             </div>
                             <div className='modal-input-wrapper'>
-                                <p className='modal-input-label'>Mean Diameter of Coil</p>
-                                <input type="text" autoComplete="off" required className="modal-input" />
+                                <p className='modal-input-label'>Diameter of wire</p>
+                                <input name="diameterOfWire" type="text" autoComplete="off" required className="modal-input" />
                             </div>
                             <div className='modal-input-wrapper'>
-                                <p className='modal-input-label'>Mean Diameter of Coil</p>
-                                <input type="text" autoComplete="off" required className="modal-input" />
+                                <p className='modal-input-label'>No. of active coils</p>
+                                <input name="noOfActiveCoils" type="text" autoComplete="off" required className="modal-input" />
                             </div>
                             <div className='modal-input-wrapper'>
-                                <p className='modal-input-label'>Mean Diameter of Coil</p>
-                                <input type="text" autoComplete="off" required className="modal-input" />
+                                <p className='modal-input-label'>Free length</p>
+                                <input name="freeLength" type="text" autoComplete="off" required className="modal-input" />
                             </div>
                             <div className='modal-input-wrapper'>
-                                <p className='modal-input-label'>Mean Diameter of Coil</p>
-                                <input type="text" autoComplete="off" required className="modal-input" />
+                                <p className='modal-input-label'>Pitch</p>
+                                <input name="pitch" type="text" autoComplete="off" required className="modal-input" />
+                            </div>
+                            <div className='modal-input-wrapper'>
+                                <p className='modal-input-label'>Quantity</p>
+                                <input name="qty" type="number" autoComplete="off" required className="modal-input" min={1} defaultValue={1} />
                             </div>
                             <button type="submit">Get In <ArrowForwardOutlinedIcon /></button>
                         </form>
