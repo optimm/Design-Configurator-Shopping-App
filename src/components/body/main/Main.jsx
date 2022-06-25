@@ -73,6 +73,10 @@ function Main() {
             val = val.toFixed(2);
             val = val.toString();
         }
+        else {
+            val = parseInt(val);
+            val = val.toString();
+        }
 
         if (name === "pivotAngle") {
             val += " deg";
@@ -160,6 +164,12 @@ function Main() {
 
     const [fullscreen, setFullscreen] = useState(true);
     const [show, setShow] = useState(false);
+
+
+
+    function confirmOrder() {
+
+    }
 
 
     return (

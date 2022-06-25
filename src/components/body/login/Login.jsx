@@ -36,7 +36,7 @@ function Login() {
 
             <div className='login-wrapper'>
                 <div className='login-card'>
-                    <h1>Welcome to Bhola Bhaia</h1>
+                    <h1>Welcome to McEnterPrices</h1>
                     <form className="login-form" autoComplete="off" onSubmit={handleSubmit}>
                         <input type="text" autoComplete="off" required placeholder="Enter your name" className="form-input" onChange={(e) => setName(e.target.value)} />
                         <input type="text" pattern="\d*" autoComplete="off" required placeholder="Enter your mobile no." className="form-input" minLength={10} maxLength={10} onChange={(e) => setMobile(e.target.value)} />
