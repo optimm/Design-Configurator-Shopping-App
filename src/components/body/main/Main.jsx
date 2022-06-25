@@ -97,12 +97,15 @@ function Main() {
 
                 </div>
                 <Modal show={showSpring} onHide={handleCloseSpring} className="data-modal">
-                    <Modal.Header closeButton>
-                        <Modal.Title>Modal heading</Modal.Title>
+                    <Modal.Header closeButton className='modal-heading'>
+                        <p style={{ fontSize: "25px" }}>Spring</p>
                     </Modal.Header>
-                    <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
-                    <Modal.Footer>
-                    </Modal.Footer>
+                    <Modal.Body className='modal-body'>
+                        <div className='modal-body-data'>
+                            <div className='modal-input'></div>
+                        </div>
+                    </Modal.Body>
+
                 </Modal>
 
             </div>
