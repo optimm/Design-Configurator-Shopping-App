@@ -4,7 +4,6 @@ import { setUser } from '../../../features/user/userSlice';
 
 import "./login.css";
 import ArrowForwardOutlinedIcon from '@mui/icons-material/ArrowForwardOutlined';
-import ParticleComponent from '../../ParticleComponent';
 
 function Login() {
     const [name, setName] = useState("");
@@ -36,7 +35,6 @@ function Login() {
         <>
 
             <div className='login-wrapper'>
-                <ParticleComponent val={50} />
                 <div className='login-card'>
                     <h1>Welcome to Bhola Bhaia</h1>
                     <form className="login-form" autoComplete="off" onSubmit={handleSubmit}>
