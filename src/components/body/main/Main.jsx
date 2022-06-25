@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setProduct, setRemoveProduct } from "../../../features/cart/cartSlice";
 import useUpdateSession from '../../../customHooks/useUpdateSession';
 import Modal from 'react-bootstrap/Modal';
+import useFilledData from '../../../customHooks/useFilledData';
 
 function Main() {
     const [fullscreen, setFullscreen] = useState(true);
@@ -18,16 +19,6 @@ function Main() {
     useUpdateSession();
     let cartRedux = useSelector((state) => state.cart.products);
     const { spring, washer, tilt } = cartRedux;
-    // let keys = useSelector((state) => Object.keys(state.cart.products));
-    // let isEmpty = useSelector((state) => state.cart.isEmpty);
-    const goToCart = () => {
-        // if (isEmpty) {
-        //     sessionStorage.removeItem('cart');
-        //     sessionStorage.setItem('isempty', true);
-        //     return;
-        // }
-
-    }
     const [showSpring, setShowSpring] = useState(false);
     const handleCloseSpring = () => setShowSpring(false);
     const handleShowSpring = () => setShowSpring(true);
@@ -38,20 +29,20 @@ function Main() {
     const handleCloseTilt = () => setShowTilt(false);
     const handleShowTilt = () => setShowTilt(true);
 
-    function handleAdd(productName) {
-        handleShowSpring();
-        let data = { head: "5" };
-        dispatch(setProduct({ productName, data }));
 
-    }
+
     function handleRemove(productName) {
-
         dispatch(setRemoveProduct(productName));
     }
-    function handleSubmit(e) {
+
+
+
+    //for spring
+    let springData = useFilledData("spring");
+    // console.log(springData);
+    function handleSubmitSpring(e) {
         e.preventDefault();
         const { meanDiameterOfCoil, diameterOfWire, noOfActiveCoils, freeLength, pitch, qty } = e.target.elements;
-
         let data = {};
         data['meanDiameterOfCoil'] = meanDiameterOfCoil.value;
         data['diameterOfWire'] = diameterOfWire.value;
@@ -59,12 +50,13 @@ function Main() {
         data['freeLength'] = freeLength.value;
         data['pitch'] = pitch.value;
         data['qty'] = qty.value;
-        console.log(data);
-
-
+        // console.log(data);
+        const productName = "spring";
+        dispatch(setProduct({ productName, data }));
+        setTimeout(() => {
+            handleCloseSpring();
+        }, 100);
     }
-
-
 
 
     return (
@@ -85,7 +77,7 @@ function Main() {
                             <div className='product-data'>
                                 <h1 className='product-name'>Helical Spring</h1>
                                 <p className='product-price'>Rs.200 /Piece</p>
-                                {!spring ? <button className='product-button' onClick={() => handleAdd("spring")}>Add to cart</button> : <button className='product-button' onClick={() => handleRemove("spring")}>Remove From Cart</button>}
+                                {!spring ? <button className='product-button' onClick={handleShowSpring}>Add to cart</button> : <button className='product-button' onClick={() => handleRemove("spring")}>Remove From Cart</button>}
                             </div>
                         </div>
                         <div className='product-card'>
@@ -119,30 +111,30 @@ function Main() {
                         <p style={{ fontSize: "20px" }}>{`Helical Spring Parameters (mm)`}</p>
                     </Modal.Header>
                     <Modal.Body className='modal-body'>
-                        <form className="modal-form" autoComplete="off" onSubmit={handleSubmit}>
+                        <form className="modal-form" autoComplete="off" onSubmit={handleSubmitSpring}>
                             <div className='modal-input-wrapper'>
                                 <p className='modal-input-label'>Mean diameter of coil</p>
-                                <input name="meanDiameterOfCoil" type="text" autoComplete="off" required className="modal-input" />
+                                <input pattern="^[0-9\.]*$" name="meanDiameterOfCoil" type="text" autoComplete="off" required className="modal-input" defaultValue={springData === null ? "0" : springData.meanDiameterOfCoil} />
                             </div>
                             <div className='modal-input-wrapper'>
                                 <p className='modal-input-label'>Diameter of wire</p>
-                                <input name="diameterOfWire" type="text" autoComplete="off" required className="modal-input" />
+                                <input pattern="^[0-9\.]*$" name="diameterOfWire" type="text" autoComplete="off" required className="modal-input" defaultValue={springData === null ? "0" : springData.diameterOfWire} />
                             </div>
                             <div className='modal-input-wrapper'>
                                 <p className='modal-input-label'>No. of active coils</p>
-                                <input name="noOfActiveCoils" type="text" autoComplete="off" required className="modal-input" />
+                                <input pattern="^[0-9\.]*$" name="noOfActiveCoils" type="text" autoComplete="off" required className="modal-input" defaultValue={springData === null ? "0" : springData.noOfActiveCoils} />
                             </div>
                             <div className='modal-input-wrapper'>
                                 <p className='modal-input-label'>Free length</p>
-                                <input name="freeLength" type="text" autoComplete="off" required className="modal-input" />
+                                <input pattern="^[0-9\.]*$" name="freeLength" type="text" autoComplete="off" required className="modal-input" defaultValue={springData === null ? "0" : springData.freeLength} />
                             </div>
                             <div className='modal-input-wrapper'>
                                 <p className='modal-input-label'>Pitch</p>
-                                <input name="pitch" type="text" autoComplete="off" required className="modal-input" />
+                                <input pattern="^[0-9\.]*$" name="pitch" type="text" autoComplete="off" required className="modal-input" defaultValue={springData === null ? "0" : springData.pitch} />
                             </div>
                             <div className='modal-input-wrapper'>
                                 <p className='modal-input-label'>Quantity</p>
-                                <input name="qty" type="number" autoComplete="off" required className="modal-input" min={1} defaultValue={1} />
+                                <input name="qty" type="number" autoComplete="off" required className="modal-input" min={1} defaultValue={springData === null ? 1 : springData.qty} />
                             </div>
                             <button type="submit">Get In <ArrowForwardOutlinedIcon /></button>
                         </form>

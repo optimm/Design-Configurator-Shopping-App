@@ -29,12 +29,12 @@ function App() {
       }
       else {
         sessionStorage.removeItem('cart');
-        console.log("yahan se hua 1");
+        // console.log("yahan se hua 1");
         sessionStorage.setItem('isempty', true);
       }
     }
     else {
-      console.log("yahan se hua 2");
+      // console.log("yahan se hua 2");
       sessionStorage.setItem('isempty', true);
 
     }
