@@ -9,7 +9,7 @@ function useFilledData(productName) {
         if (cdata) {
             if (cdata.length > 0) {
                 cdata.map((item) => {
-                    if (item.productName = productName) {
+                    if (item.productName === productName) {
                         data = item.data;
                     }
                 })

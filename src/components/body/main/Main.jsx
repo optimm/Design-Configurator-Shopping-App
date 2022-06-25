@@ -41,7 +41,7 @@ function Main() {
 
     //for spring
     let springData = useFilledData("spring");
-    // console.log(springData);
+    console.log("spring ka data", springData);
     function handleSubmitSpring(e) {
         e.preventDefault();
         const { meanDiameterOfCoil, diameterOfWire, noOfActiveCoils, freeLength, pitch, qty } = e.target.elements;
@@ -52,11 +52,30 @@ function Main() {
         data['freeLength'] = freeLength.value;
         data['pitch'] = pitch.value;
         data['qty'] = qty.value;
-        console.log("new data lele bhai", data);
+        console.log("new data lele bhai spring ka", data);
         const productName = "spring";
         dispatch(setProduct({ productName, data }));
         setTimeout(() => {
             handleCloseSpring();
+        }, 100);
+    }
+
+    //for washer
+    let washerData = useFilledData("washer");
+    function handleSubmitWasher(e) {
+        e.preventDefault();
+        const { shearDepth, radiusOfFitting, innerDiameterOfTube, outerDiameterOfFitting, qty } = e.target.elements;
+        let data = {};
+        data['shearDepth'] = shearDepth.value;
+        data['radiusOfFitting'] = radiusOfFitting.value;
+        data['innerDiameterOfTube'] = innerDiameterOfTube.value;
+        data['outerDiameterOfFitting'] = outerDiameterOfFitting.value;
+        data['qty'] = qty.value;
+        console.log("new data lele bhai washer ka", data);
+        const productName = "washer";
+        dispatch(setProduct({ productName, data }));
+        setTimeout(() => {
+            handleCloseWasher();
         }, 100);
     }
 
@@ -82,7 +101,7 @@ function Main() {
                                 {!spring ? <button className='product-button' onClick={handleShowSpring}>Add to cart</button> :
                                     <div className='product-button-group'>
                                         <button className='product-button' onClick={() => handleRemove("spring")}><DeleteIcon /></button>
-                                        <button className='product-button' onClick={() => handleShowSpring("spring")}><UpdateIcon /></button>
+                                        <button className='product-button' onClick={handleShowSpring}><UpdateIcon /></button>
                                     </div>
                                 }
                             </div>
@@ -92,7 +111,12 @@ function Main() {
                             <div className='product-data'>
                                 <h1 className='product-name'>Washer</h1>
                                 <p className='product-price'>Rs.20 /10 Pieces</p>
-                                <button className='product-button'>Add to cart</button>
+                                {!washer ? <button className='product-button' onClick={handleShowWasher}>Add to cart</button> :
+                                    <div className='product-button-group'>
+                                        <button className='product-button' onClick={() => handleRemove("washer")}><DeleteIcon /></button>
+                                        <button className='product-button' onClick={handleShowWasher}><UpdateIcon /></button>
+                                    </div>
+                                }
 
                             </div>
                         </div>
@@ -143,11 +167,48 @@ function Main() {
                                 <p className='modal-input-label'>Quantity</p>
                                 <input name="qty" type="number" autoComplete="off" required className="modal-input" min={1} defaultValue={springData === null ? 1 : springData.qty} />
                             </div>
-                            <button type="submit">Get In <ArrowForwardOutlinedIcon /></button>
+                            <button type="submit">Confirm <ArrowForwardOutlinedIcon /></button>
                         </form>
                     </Modal.Body>
 
                 </Modal>
+
+
+
+                <Modal show={showWasher} onHide={handleCloseWasher} className="data-modal">
+                    <Modal.Header closeButton className='modal-heading'>
+                        <p style={{ fontSize: "20px" }}>{`Washer Parameters (mm)`}</p>
+                    </Modal.Header>
+                    <Modal.Body className='modal-body'>
+                        <form className="modal-form" autoComplete="off" onSubmit={handleSubmitWasher}>
+                            <div className='modal-input-wrapper'>
+                                <p className='modal-input-label'>Shear depth</p>
+                                <input pattern="^[0-9\.]*$" name="shearDepth" type="text" autoComplete="off" required className="modal-input" defaultValue={washerData === null ? "0" : washerData.shearDepth} />
+                            </div>
+                            <div className='modal-input-wrapper'>
+                                <p className='modal-input-label'>Radius of fitting</p>
+                                <input pattern="^[0-9\.]*$" name="radiusOfFitting" type="text" autoComplete="off" required className="modal-input" defaultValue={washerData === null ? "0" : washerData.radiusOfFitting} />
+                            </div>
+                            <div className='modal-input-wrapper'>
+                                <p className='modal-input-label'>Inner diameter of tube</p>
+                                <input pattern="^[0-9\.]*$" name="innerDiameterOfTube" type="text" autoComplete="off" required className="modal-input" defaultValue={washerData === null ? "0" : washerData.innerDiameterOfTube} />
+                            </div>
+                            <div className='modal-input-wrapper'>
+                                <p className='modal-input-label'>Outer diameter of fitting</p>
+                                <input pattern="^[0-9\.]*$" name="outerDiameterOfFitting" type="text" autoComplete="off" required className="modal-input" defaultValue={washerData === null ? "0" : washerData.outerDiameterOfFitting} />
+                            </div>
+
+                            <div className='modal-input-wrapper'>
+                                <p className='modal-input-label'>Quantity</p>
+                                <input name="qty" type="number" autoComplete="off" required className="modal-input" min={1} defaultValue={washerData === null ? 1 : washerData.qty} />
+                            </div>
+                            <button type="submit">Confirm <ArrowForwardOutlinedIcon /></button>
+                        </form>
+                    </Modal.Body>
+
+                </Modal>
+
+
 
             </div>
 
