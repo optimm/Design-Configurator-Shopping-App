@@ -2,11 +2,10 @@ import React, { useEffect, useState } from 'react'
 import Nav from '../../header/Nav'
 import "./main.css";
 import mainImg from "../../../images/main.png";
-import { Grid } from '@mui/material';
 import washerImg from "../../../images/washer.jpg"
 import springImg from "../../../images/spring.jpeg"
 import tiltImg from "../../../images/tilt.png"
-import ArrowForwardOutlinedIcon from '@mui/icons-material/ArrowForwardOutlined';
+// import ArrowForwardOutlinedIcon from '@mui/icons-material/ArrowForwardOutlined';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setProduct, setRemoveProduct } from "../../../features/cart/cartSlice";
@@ -58,14 +57,9 @@ function Main() {
             <div style={{ width: "100%", overflowX: "hidden" }}>
                 <Nav />
                 <div className='landing-wrapper'>
-                    <Grid container style={{ width: "100%", height: "100%" }}>
-                        <Grid item xs={6}>
-                            <h1>Hello Bhola Bhaia</h1>
-                        </Grid>
-                        <Grid item xs={6} style={{ position: "relative" }}>
-                            <img src={mainImg} className="main-image" />
-                        </Grid>
-                    </Grid>
+
+
+                    <img src={mainImg} className="main-image" />
 
                 </div>
                 <div className='landing-products'>
@@ -101,7 +95,7 @@ function Main() {
                         </div>
                     </div>
                     <Link to="/cart" style={{ width: "18%", color: "white", textDecoration: "none" }}>
-                        <button className='cart-button'>Go to Cart <ArrowForwardOutlinedIcon /></button>
+                        <button className='cart-button'>Go to Cart </button>
                     </Link>
 
                 </div>
