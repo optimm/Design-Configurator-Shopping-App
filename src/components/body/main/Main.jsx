@@ -10,15 +10,10 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setProduct, setRemoveProduct } from "../../../features/cart/cartSlice";
 import useUpdateSession from '../../../customHooks/useUpdateSession';
-import { Button, Modal } from 'react-bootstrap';
-
-
-
-
-
+import Modal from 'react-bootstrap/Modal';
 
 function Main() {
-
+    const [fullscreen, setFullscreen] = useState(true);
     const dispatch = useDispatch();
     useUpdateSession();
     let cartRedux = useSelector((state) => state.cart.products);
@@ -35,11 +30,13 @@ function Main() {
     }
 
     function handleAdd(productName) {
+        handleShowSpring();
         let data = { head: "5" };
         dispatch(setProduct({ productName, data }));
 
     }
     function handleRemove(productName) {
+
         dispatch(setRemoveProduct(productName));
     }
     const [showSpring, setShowSpring] = useState(false);
@@ -99,21 +96,15 @@ function Main() {
                     </Link>
 
                 </div>
-                Spring
-                <Modal show={showSpring} onHide={handleCloseSpring} className="spring-modal">
+                <Modal show={showSpring} onHide={handleCloseSpring} className="data-modal">
                     <Modal.Header closeButton>
                         <Modal.Title>Modal heading</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
                     <Modal.Footer>
-                        {/* <Button variant="secondary" onClick={handleCloseSpring}>
-                            Close
-                        </Button>
-                        <Button variant="primary" onClick={handleCloseSpring} >
-                            Save Changes
-                        </Button> */}
                     </Modal.Footer>
                 </Modal>
+
             </div>
 
         </>
