@@ -1,0 +1,123 @@
+.main-image {
+    height: 55vh;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+}
+
+.landing-wrapper {
+    height: calc(100vh - 56px);
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.landing-products {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    background-color: rgb(0, 5, 45);
+    margin: 200px 0px 100px 0px;
+    padding: 30px 0px;
+}
+
+.products-head {
+    font-size: 40px;
+    color: white;
+}
+
+.product-container {
+    padding: 100px 0px 50px 0px;
+    width: 90%;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.product-card {
+    width: 30%;
+    height: 150px;
+    background: linear-gradient(225deg, rgb(0, 78, 146, 0.8) 16%, rgb(0, 13, 122, 0.8) 100%);
+    display: flex;
+    border-radius: 5px;
+    padding: 0px;
+}
+
+.product-image {
+    height: 150px;
+    width: 150px;
+    border-radius: 5px 0px 0px 5px;
+    background-color: white;
+}
+
+.product-data {
+    box-sizing: border-box;
+    width: calc(100% - 150px);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 10px 30px;
+}
+
+.product-image-content {
+    height: 150px;
+    width: 150px;
+    border-radius: 5px 0px 0px 5px;
+}
+
+.product-name {
+    font-size: 20px;
+    color: rgb(255, 255, 255);
+}
+
+.product-price {
+    font-size: 14px;
+    margin-top: 5px;
+    color: rgb(247, 247, 247);
+}
+
+.product-button {
+    outline: none;
+    border: none;
+    padding: 7px 15px;
+    width: fit-content;
+    font-weight: 500;
+    background-color: rgb(0, 0, 0, 0.5);
+    border-radius: 5px;
+    color: white;
+    font-size: 15px;
+    margin-top: 35px;
+    transition: all 0.5s ease;
+}
+
+.product-button:hover {
+    background-color: rgb(0, 0, 0, 0.7);
+}
+
+.cart-button {
+    outline: none;
+    border: none;
+    padding: 10px;
+    display: block;
+    margin: auto;
+    width: 100%;
+    font-weight: 500;
+
+    background: linear-gradient(to right bottom, rgb(0, 127, 255, 0.5), rgb(0, 89, 178, 0.5) 120%);
+    box-shadow: rgb(0 0 0 / 10%) 0px 20px 25px, rgb(0 0 0 / 4%) 0px 10px 10px;
+    border-radius: 5px;
+    color: white;
+    font-weight: 500;
+    font-size: 20px;
+    margin-top: 35px;
+    transition: all 0.3s ease;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.cart-button:hover {
+    gap: 20px;
+    background-color: rgb(0, 0, 0, 0.8);
+}
