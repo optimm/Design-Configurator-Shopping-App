@@ -28,6 +28,15 @@ function Main() {
         // }
 
     }
+    const [showSpring, setShowSpring] = useState(false);
+    const handleCloseSpring = () => setShowSpring(false);
+    const handleShowSpring = () => setShowSpring(true);
+    const [showWasher, setShowWasher] = useState(false);
+    const handleCloseWasher = () => setShowWasher(false);
+    const handleShowWasher = () => setShowWasher(true);
+    const [showTilt, setShowTilt] = useState(false);
+    const handleCloseTilt = () => setShowTilt(false);
+    const handleShowTilt = () => setShowTilt(true);
 
     function handleAdd(productName) {
         handleShowSpring();
@@ -39,15 +48,10 @@ function Main() {
 
         dispatch(setRemoveProduct(productName));
     }
-    const [showSpring, setShowSpring] = useState(false);
-    const handleCloseSpring = () => setShowSpring(false);
-    const handleShowSpring = () => setShowSpring(true);
-    const [showWasher, setShowWasher] = useState(false);
-    const handleCloseWasher = () => setShowWasher(false);
-    const handleShowWasher = () => setShowWasher(true);
-    const [showTilt, setShowTilt] = useState(false);
-    const handleCloseTilt = () => setShowTilt(false);
-    const handleShowTilt = () => setShowTilt(true);
+    function handleSubmit(e) {
+        e.preventDefault();
+    }
+
 
     return (
         <>
@@ -101,9 +105,14 @@ function Main() {
                         <p style={{ fontSize: "25px" }}>Spring</p>
                     </Modal.Header>
                     <Modal.Body className='modal-body'>
-                        <div className='modal-body-data'>
-                            <div className='modal-input'></div>
-                        </div>
+                        <form className="modal-form" autoComplete="off" onSubmit={handleSubmit}>
+                            <div className='modal-input-wrapper'>
+                                <input type="text" autoComplete="off" required placeholder="Enter your name" className="modal-input" />
+                            </div>
+                            <input type="text" pattern="\d*" autoComplete="off" required placeholder="Enter your mobile no." className="modal-input" minLength={10} maxLength={10} />
+                            <input type="email" autoComplete="off" required placeholder="Enter your email" className="modal-input" />
+                            <button type="submit">Get In <ArrowForwardOutlinedIcon /></button>
+                        </form>
                     </Modal.Body>
 
                 </Modal>
