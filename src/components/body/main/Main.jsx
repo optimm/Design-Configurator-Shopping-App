@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Nav from '../../header/Nav'
 import "./main.css";
 import mainImg from "../../../images/main.png";
 import washerImg from "../../../images/washer.jpg"
 import springImg from "../../../images/spring.jpeg"
 import tiltImg from "../../../images/tilt.png"
-import ArrowForwardOutlinedIcon from '@mui/icons-material/ArrowForwardOutlined';
 import DeleteIcon from '@mui/icons-material/Delete';
 import UpdateIcon from '@mui/icons-material/Update';
 import { Link } from 'react-router-dom';
@@ -14,9 +13,11 @@ import { setProduct, setRemoveProduct } from "../../../features/cart/cartSlice";
 import useUpdateSession from '../../../customHooks/useUpdateSession';
 import Modal from 'react-bootstrap/Modal';
 import useFilledData from '../../../customHooks/useFilledData';
+import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 function Main() {
-    const [fullscreen, setFullscreen] = useState(true);
+
     const dispatch = useDispatch();
     useUpdateSession();
     let cartRedux = useSelector((state) => state.cart.products);
@@ -100,6 +101,11 @@ function Main() {
 
     }
 
+    //for cart
+
+    const [fullscreen, setFullscreen] = useState(true);
+    const [show, setShow] = useState(false);
+
 
     return (
         <>
@@ -159,7 +165,7 @@ function Main() {
                         </div>
                     </div>
                     <Link to="/cart" style={{ width: "18%", color: "white", textDecoration: "none" }}>
-                        <button className='cart-button'>Go to Cart <ArrowForwardOutlinedIcon /></button>
+                        <button className='cart-button'>Check Cart<ShoppingCartIcon /></button>
                     </Link>
 
                 </div>
@@ -193,7 +199,7 @@ function Main() {
                                 <p className='modal-input-label'>Quantity</p>
                                 <input name="qty" type="number" autoComplete="off" required className="modal-input" min={1} defaultValue={springData === null ? 1 : springData.qty} />
                             </div>
-                            <button type="submit">Confirm <ArrowForwardOutlinedIcon /></button>
+                            <button type="submit" className='modal-button'>Confirm <ThumbUpAltIcon /></button>
                         </form>
                     </Modal.Body>
 
@@ -228,7 +234,7 @@ function Main() {
                                 <p className='modal-input-label'>Quantity</p>
                                 <input name="qty" type="number" autoComplete="off" required className="modal-input" min={1} defaultValue={washerData === null ? 1 : washerData.qty} />
                             </div>
-                            <button type="submit">Confirm <ArrowForwardOutlinedIcon /></button>
+                            <button type="submit" className='modal-button'>Confirm <ThumbUpAltIcon /></button>
                         </form>
                     </Modal.Body>
 
@@ -261,10 +267,21 @@ function Main() {
                                 <p className='modal-input-label'>Quantity</p>
                                 <input name="qty" type="number" autoComplete="off" required className="modal-input" min={1} defaultValue={tiltData === null ? 1 : tiltData.qty} />
                             </div>
-                            <button type="submit">Confirm <ArrowForwardOutlinedIcon /></button>
+                            <button type="submit" className='modal-button'>Confirm <ThumbUpAltIcon /></button>
                         </form>
                     </Modal.Body>
 
+                </Modal>
+
+
+
+
+                {/* cart modal */}
+                <Modal show={show} fullscreen={fullscreen} onHide={() => setShow(false)}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Modal</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>Modal body content</Modal.Body>
                 </Modal>
 
 
