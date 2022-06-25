@@ -21,6 +21,7 @@ function Main() {
     const dispatch = useDispatch();
     useUpdateSession();
     let cartRedux = useSelector((state) => state.cart.products);
+    let keys = useSelector((state) => Object.keys(state.cart.products));
     const { spring, washer, tiltPad } = cartRedux;
     const [showSpring, setShowSpring] = useState(false);
     const handleCloseSpring = () => setShowSpring(false);
@@ -33,11 +34,52 @@ function Main() {
     const handleShowTilt = () => setShowTilt(true);
 
 
-
     function handleRemove(productName) {
         dispatch(setRemoveProduct(productName));
     }
 
+    function getName(productName) {
+        if (productName === "spring") return "Helical Spring";
+        if (productName == "washer") return "Washer";
+        if (productName === "tiltPad") return "Tilt Pad";
+    }
+    function getImg(productName) {
+        if (productName === "spring") return springImg;
+        if (productName == "washer") return washerImg;
+        if (productName === "tiltPad") return tiltImg;
+    }
+    function getUpper(str) {
+        str = str.replace(/([A-Z])/g, ' $1').replace(/^./, function (str) { return str.toUpperCase(); })
+        return str;
+    }
+
+    function getVal(name, val) {
+        if (val.indexOf('.') != -1) {
+            val = parseFloat(val);
+            val = val.toFixed(2);
+            val = val.toString();
+        }
+
+        if (name === "pivotAngle") {
+            val += " deg";
+        }
+        else if (name === "quantity") {
+
+        }
+        else {
+            val += " mm";
+        }
+        return val;
+    }
+    function Giveps({ arr, obj }) {
+        console.log("jia ho", arr);
+        return (<>{arr.map((it) => {
+            let name = getUpper(it);
+            let val = getVal(it, obj[it]);
+            return (<p>{`${name} : ${val}`}</p>)
+        })}</>)
+        return null;
+    }
 
 
     //for spring
@@ -45,14 +87,14 @@ function Main() {
     console.log("spring ka data", springData);
     function handleSubmitSpring(e) {
         e.preventDefault();
-        const { meanDiameterOfCoil, diameterOfWire, noOfActiveCoils, freeLength, pitch, qty } = e.target.elements;
+        const { meanDiameterOfCoil, diameterOfWire, noOfActiveCoils, freeLength, pitch, quantity } = e.target.elements;
         let data = {};
         data['meanDiameterOfCoil'] = meanDiameterOfCoil.value;
         data['diameterOfWire'] = diameterOfWire.value;
         data['noOfActiveCoils'] = noOfActiveCoils.value;
         data['freeLength'] = freeLength.value;
         data['pitch'] = pitch.value;
-        data['qty'] = qty.value;
+        data['quantity'] = quantity.value;
         console.log("new data lele bhai spring ka", data);
         const productName = "spring";
         dispatch(setProduct({ productName, data }));
@@ -65,13 +107,13 @@ function Main() {
     let washerData = useFilledData("washer");
     function handleSubmitWasher(e) {
         e.preventDefault();
-        const { shearDepth, radiusOfFitting, innerDiameterOfTube, outerDiameterOfFitting, qty } = e.target.elements;
+        const { shearDepth, radiusOfFitting, innerDiameterOfTube, outerDiameterOfFitting, quantity } = e.target.elements;
         let data = {};
         data['shearDepth'] = shearDepth.value;
         data['radiusOfFitting'] = radiusOfFitting.value;
         data['innerDiameterOfTube'] = innerDiameterOfTube.value;
         data['outerDiameterOfFitting'] = outerDiameterOfFitting.value;
-        data['qty'] = qty.value;
+        data['quantity'] = quantity.value;
         console.log("new data lele bhai washer ka", data);
         const productName = "washer";
         dispatch(setProduct({ productName, data }));
@@ -85,13 +127,13 @@ function Main() {
     let tiltData = useFilledData("tiltPad");
     function handleSubmitTilt(e) {
         e.preventDefault();
-        const { innerDia, outerDia, pivotAngle, lengthOfPad, qty } = e.target.elements;
+        const { innerDiameter, outerDiameter, pivotAngle, lengthOfPad, quantity } = e.target.elements;
         let data = {};
-        data['innerDia'] = innerDia.value;
-        data['outerDia'] = outerDia.value;
+        data['innerDiameter'] = innerDiameter.value;
+        data['outerDiameter'] = outerDiameter.value;
         data['pivotAngle'] = pivotAngle.value;
         data['lengthOfPad'] = lengthOfPad.value;
-        data['qty'] = qty.value;
+        data['quantity'] = quantity.value;
         console.log("new data lele bhai tilt ka", data);
         const productName = "tiltPad";
         dispatch(setProduct({ productName, data }));
@@ -197,7 +239,7 @@ function Main() {
                             </div>
                             <div className='modal-input-wrapper'>
                                 <p className='modal-input-label'>Quantity</p>
-                                <input name="qty" type="number" autoComplete="off" required className="modal-input" min={1} defaultValue={springData === null ? 1 : springData.qty} />
+                                <input name="quantity" type="number" autoComplete="off" required className="modal-input" min={1} defaultValue={springData === null ? 1 : springData.quantity} />
                             </div>
                             <button type="submit" className='modal-button'>Confirm <ThumbUpAltIcon /></button>
                         </form>
@@ -232,7 +274,7 @@ function Main() {
 
                             <div className='modal-input-wrapper'>
                                 <p className='modal-input-label'>Quantity</p>
-                                <input name="qty" type="number" autoComplete="off" required className="modal-input" min={1} defaultValue={washerData === null ? 1 : washerData.qty} />
+                                <input name="quantity" type="number" autoComplete="off" required className="modal-input" min={1} defaultValue={washerData === null ? 1 : washerData.quantity} />
                             </div>
                             <button type="submit" className='modal-button'>Confirm <ThumbUpAltIcon /></button>
                         </form>
@@ -247,11 +289,11 @@ function Main() {
                         <form className="modal-form" autoComplete="off" onSubmit={handleSubmitTilt}>
                             <div className='modal-input-wrapper'>
                                 <p className='modal-input-label'>Inner diameter</p>
-                                <input pattern="^[0-9\.]*$" name="innerDia" type="text" autoComplete="off" required className="modal-input" defaultValue={tiltData === null ? "0" : tiltData.innerDia} />
+                                <input pattern="^[0-9\.]*$" name="innerDiameter" type="text" autoComplete="off" required className="modal-input" defaultValue={tiltData === null ? "0" : tiltData.innerDiameter} />
                             </div>
                             <div className='modal-input-wrapper'>
                                 <p className='modal-input-label'>Outer diameter</p>
-                                <input pattern="^[0-9\.]*$" name="outerDia" type="text" autoComplete="off" required className="modal-input" defaultValue={tiltData === null ? "0" : tiltData.outerDia} />
+                                <input pattern="^[0-9\.]*$" name="outerDiameter" type="text" autoComplete="off" required className="modal-input" defaultValue={tiltData === null ? "0" : tiltData.outerDiameter} />
                             </div>
 
                             <div className='modal-input-wrapper'>
@@ -265,7 +307,7 @@ function Main() {
                             </div>
                             <div className='modal-input-wrapper'>
                                 <p className='modal-input-label'>Quantity</p>
-                                <input name="qty" type="number" autoComplete="off" required className="modal-input" min={1} defaultValue={tiltData === null ? 1 : tiltData.qty} />
+                                <input name="quantity" type="number" autoComplete="off" required className="modal-input" min={1} defaultValue={tiltData === null ? 1 : tiltData.quantity} />
                             </div>
                             <button type="submit" className='modal-button'>Confirm <ThumbUpAltIcon /></button>
                         </form>
@@ -282,6 +324,31 @@ function Main() {
                         <div className='cart-head'>
                             <h1>Cart</h1>
                             <button className="back-button" onClick={() => setShow(false)}>Back</button>
+                        </div>
+                        <div className='cart-items'>
+                            {keys.length > 0 && keys.map((item) => {
+                                let itemData = cartRedux[item];
+                                let im = getImg(item);
+                                let itemkeys = Object.keys(itemData);
+
+                                return (
+                                    < div className='cart-item-card'>
+                                        <div className='product-image'><img src={im} className="product-image-content" /></div>
+                                        <div className='cart-item-data'>
+                                            <h2>{getName(item)}</h2>
+                                            <div className='cart-content'>
+                                                {itemkeys.length > 0 && <Giveps arr={itemkeys} obj={itemData} />}
+                                            </div>
+                                        </div>
+                                    </div>
+                                )
+                            })
+
+                            }
+                        </div>
+                        <div className='confirmation'>
+                            <p>Order value - Rs. 800</p>
+                            <button>Confirm Order</button>
                         </div>
                     </Modal.Body>
                 </Modal>
