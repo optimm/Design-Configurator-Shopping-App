@@ -5,7 +5,7 @@ import mainImg from "../../../images/main.png";
 import washerImg from "../../../images/washer.jpg"
 import springImg from "../../../images/spring.jpeg"
 import tiltImg from "../../../images/tilt.png"
-// import ArrowForwardOutlinedIcon from '@mui/icons-material/ArrowForwardOutlined';
+import ArrowForwardOutlinedIcon from '@mui/icons-material/ArrowForwardOutlined';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setProduct, setRemoveProduct } from "../../../features/cart/cartSlice";
@@ -92,7 +92,7 @@ function Main() {
                         </div>
                     </div>
                     <Link to="/cart" style={{ width: "18%", color: "white", textDecoration: "none" }}>
-                        <button className='cart-button'>Go to Cart </button>
+                        <button className='cart-button'>Go to Cart <ArrowForwardOutlinedIcon /></button>
                     </Link>
 
                 </div>

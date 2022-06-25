@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { setUser } from '../../../features/user/userSlice';
 
 import "./login.css";
-// import ArrowForwardOutlinedIcon from '@mui/icons-material/ArrowForwardOutlined';
+import ArrowForwardOutlinedIcon from '@mui/icons-material/ArrowForwardOutlined';
 import ParticleComponent from '../../ParticleComponent';
 
 function Login() {
@@ -43,7 +43,7 @@ function Login() {
                         <input type="text" autoComplete="off" required placeholder="Enter your name" className="form-input" onChange={(e) => setName(e.target.value)} />
                         <input type="text" pattern="\d*" autoComplete="off" required placeholder="Enter your mobile no." className="form-input" minLength={10} maxLength={10} onChange={(e) => setMobile(e.target.value)} />
                         <input type="email" autoComplete="off" required placeholder="Enter your email" className="form-input" onChange={(e) => setEmail(e.target.value)} />
-                        <button type="submit">Get In </button>
+                        <button type="submit">Get In <ArrowForwardOutlinedIcon /></button>
                     </form>
                 </div>
             </div>
