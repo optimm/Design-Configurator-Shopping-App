@@ -69,7 +69,7 @@ function Main() {
                         <div className='product-card'>
                             <div className='product-image'><img src={springImg} className="product-image-content" /></div>
                             <div className='product-data'>
-                                <h1 className='product-name'>Spring</h1>
+                                <h1 className='product-name'>Helical Spring</h1>
                                 <p className='product-price'>Rs.200 /Piece</p>
                                 {!spring ? <button className='product-button' onClick={() => handleAdd("spring")}>Add to cart</button> : <button className='product-button' onClick={() => handleRemove("spring")}>Remove From Cart</button>}
                             </div>
@@ -102,15 +102,30 @@ function Main() {
                 </div>
                 <Modal show={showSpring} onHide={handleCloseSpring} className="data-modal">
                     <Modal.Header closeButton className='modal-heading'>
-                        <p style={{ fontSize: "25px" }}>Spring</p>
+                        <p style={{ fontSize: "25px" }}>Helical Spring</p>
                     </Modal.Header>
                     <Modal.Body className='modal-body'>
                         <form className="modal-form" autoComplete="off" onSubmit={handleSubmit}>
                             <div className='modal-input-wrapper'>
-                                <input type="text" autoComplete="off" required placeholder="Enter your name" className="modal-input" />
+                                <p className='modal-input-label'>Mean Diameter of Coil</p>
+                                <input type="text" autoComplete="off" required className="modal-input" />
                             </div>
-                            <input type="text" pattern="\d*" autoComplete="off" required placeholder="Enter your mobile no." className="modal-input" minLength={10} maxLength={10} />
-                            <input type="email" autoComplete="off" required placeholder="Enter your email" className="modal-input" />
+                            <div className='modal-input-wrapper'>
+                                <p className='modal-input-label'>Mean Diameter of Coil</p>
+                                <input type="text" autoComplete="off" required className="modal-input" />
+                            </div>
+                            <div className='modal-input-wrapper'>
+                                <p className='modal-input-label'>Mean Diameter of Coil</p>
+                                <input type="text" autoComplete="off" required className="modal-input" />
+                            </div>
+                            <div className='modal-input-wrapper'>
+                                <p className='modal-input-label'>Mean Diameter of Coil</p>
+                                <input type="text" autoComplete="off" required className="modal-input" />
+                            </div>
+                            <div className='modal-input-wrapper'>
+                                <p className='modal-input-label'>Mean Diameter of Coil</p>
+                                <input type="text" autoComplete="off" required className="modal-input" />
+                            </div>
                             <button type="submit">Get In <ArrowForwardOutlinedIcon /></button>
                         </form>
                     </Modal.Body>

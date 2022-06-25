@@ -162,4 +162,14 @@
 .modal-input-wrapper {
     width: 100%;
     display: flex;
+    justify-content: space-between;
+}
+
+.modal-input-label {
+    width: 50%;
+    color: white;
+}
+
+.modal-input {
+    width: 48%;
 }
