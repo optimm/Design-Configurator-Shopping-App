@@ -278,10 +278,12 @@ function Main() {
 
                 {/* cart modal */}
                 <Modal show={show} fullscreen={fullscreen} onHide={() => setShow(false)} >
-                    <Modal.Header closeButton>
-                        Cart
-                    </Modal.Header>
-                    <Modal.Body className="cart-modal">Modal body content</Modal.Body>
+                    <Modal.Body className="cart-modal">
+                        <div className='cart-head'>
+                            <h1>Cart</h1>
+                            <button className="back-button" onClick={() => setShow(false)}>Back</button>
+                        </div>
+                    </Modal.Body>
                 </Modal>
 
 
