@@ -314,3 +314,11 @@
     background-color: rgb(0, 0, 0, 0.8);
 
 }
+
+.empty-icon {
+    position: absolute;
+    top: 50%;
+    left: 49%;
+    transform: translate(-50%, -50%);
+    height: 300px;
+}

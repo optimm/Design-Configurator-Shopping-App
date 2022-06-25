@@ -22,6 +22,7 @@ function Main() {
     useUpdateSession();
     let cartRedux = useSelector((state) => state.cart.products);
     let keys = useSelector((state) => Object.keys(state.cart.products));
+    let isEmpty = useSelector((state) => Object.keys(state.cart.products).length === 0);
     const { spring, washer, tiltPad } = cartRedux;
     const [showSpring, setShowSpring] = useState(false);
     const handleCloseSpring = () => setShowSpring(false);
@@ -48,9 +49,22 @@ function Main() {
         if (productName == "washer") return washerImg;
         if (productName === "tiltPad") return tiltImg;
     }
+    function getPrice(productName) {
+        if (productName === "spring") return 200;
+        if (productName == "washer") return 2;
+        if (productName === "tiltPad") return 1000;
+    }
     function getUpper(str) {
         str = str.replace(/([A-Z])/g, ' $1').replace(/^./, function (str) { return str.toUpperCase(); })
         return str;
+    }
+    function getOrderValue(arr, obj) {
+        console.log("jia ho", arr, obj);
+        let total = 0;
+        arr.map((item) => {
+            total += (parseInt(getPrice(item))) * (parseInt(obj[item].quantity));
+        })
+        return total;
     }
 
     function getVal(name, val) {
@@ -72,7 +86,6 @@ function Main() {
         return val;
     }
     function Giveps({ arr, obj }) {
-        console.log("jia ho", arr);
         return (<>{arr.map((it) => {
             let name = getUpper(it);
             let val = getVal(it, obj[it]);
@@ -346,10 +359,12 @@ function Main() {
 
                             }
                         </div>
-                        <div className='confirmation'>
-                            <p>Order value - Rs. 800</p>
-                            <button>Confirm Order</button>
-                        </div>
+                        {
+                            !isEmpty ? <div className='confirmation'>
+                                <p>Order value - Rs. {getOrderValue(keys, cartRedux)}</p>
+                                <button disabled={isEmpty}>Confirm Order</button>
+                            </div> : <img src="https://media4.giphy.com/media/9fAh7MfgrslSjg1Jk4/giphy.gif?cid=ecf05e471fyzg9b1qa5t4qx2txzcao80f9yt0a5fa0mu6z8j&rid=giphy.gif&ct=s" alt="empty icon" className="empty-icon" />
+                        }
                     </Modal.Body>
                 </Modal>
 
