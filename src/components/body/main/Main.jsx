@@ -52,7 +52,7 @@ function Main() {
         data['freeLength'] = freeLength.value;
         data['pitch'] = pitch.value;
         data['qty'] = qty.value;
-        // console.log(data);
+        console.log("new data lele bhai", data);
         const productName = "spring";
         dispatch(setProduct({ productName, data }));
         setTimeout(() => {

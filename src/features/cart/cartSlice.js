@@ -13,9 +13,14 @@ const cartSlice = createSlice({
             // console.log(productName, data);
             if (productName && data) {
                 state.isEmpty = false;
-                state.products = {
-                    [productName]: data, ...state.products
-                };
+                if (state.products[productName]) {
+                    state.products[productName] = data;
+                }
+                else {
+                    state.products = {
+                        [productName]: data, ...state.products
+                    };
+                }
             }
             // return state;
         },
