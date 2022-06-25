@@ -20,7 +20,7 @@ function Main() {
     const dispatch = useDispatch();
     useUpdateSession();
     let cartRedux = useSelector((state) => state.cart.products);
-    const { spring, washer, tilt } = cartRedux;
+    const { spring, washer, tiltPad } = cartRedux;
     const [showSpring, setShowSpring] = useState(false);
     const handleCloseSpring = () => setShowSpring(false);
     const handleShowSpring = () => setShowSpring(true);
@@ -80,6 +80,27 @@ function Main() {
     }
 
 
+    //for tilt pad
+    let tiltData = useFilledData("tiltPad");
+    function handleSubmitTilt(e) {
+        e.preventDefault();
+        const { innerDia, outerDia, pivotAngle, lengthOfPad, qty } = e.target.elements;
+        let data = {};
+        data['innerDia'] = innerDia.value;
+        data['outerDia'] = outerDia.value;
+        data['pivotAngle'] = pivotAngle.value;
+        data['lengthOfPad'] = lengthOfPad.value;
+        data['qty'] = qty.value;
+        console.log("new data lele bhai tilt ka", data);
+        const productName = "tiltPad";
+        dispatch(setProduct({ productName, data }));
+        setTimeout(() => {
+            handleCloseTilt();
+        }, 100);
+
+    }
+
+
     return (
         <>
             <div style={{ width: "100%", overflowX: "hidden" }}>
@@ -127,7 +148,12 @@ function Main() {
                             <div className='product-data'>
                                 <h1 className='product-name'>Tilt Pad</h1>
                                 <p className='product-price'>Rs.1000 /Piece</p>
-                                <button className='product-button'>Add to cart</button>
+                                {!tiltPad ? <button className='product-button' onClick={handleShowTilt}>Add to cart</button> :
+                                    <div className='product-button-group'>
+                                        <button className='product-button' onClick={() => handleRemove("tiltPad")}><DeleteIcon /></button>
+                                        <button className='product-button' onClick={handleShowTilt}><UpdateIcon /></button>
+                                    </div>
+                                }
 
                             </div>
                         </div>
@@ -201,6 +227,39 @@ function Main() {
                             <div className='modal-input-wrapper'>
                                 <p className='modal-input-label'>Quantity</p>
                                 <input name="qty" type="number" autoComplete="off" required className="modal-input" min={1} defaultValue={washerData === null ? 1 : washerData.qty} />
+                            </div>
+                            <button type="submit">Confirm <ArrowForwardOutlinedIcon /></button>
+                        </form>
+                    </Modal.Body>
+
+                </Modal>
+                <Modal show={showTilt} onHide={handleCloseTilt} className="data-modal">
+                    <Modal.Header closeButton className='modal-heading'>
+                        <p style={{ fontSize: "20px" }}>{`Tilt Pad Parameters (mm,deg)`}</p>
+                    </Modal.Header>
+                    <Modal.Body className='modal-body'>
+                        <form className="modal-form" autoComplete="off" onSubmit={handleSubmitTilt}>
+                            <div className='modal-input-wrapper'>
+                                <p className='modal-input-label'>Inner diameter</p>
+                                <input pattern="^[0-9\.]*$" name="innerDia" type="text" autoComplete="off" required className="modal-input" defaultValue={tiltData === null ? "0" : tiltData.innerDia} />
+                            </div>
+                            <div className='modal-input-wrapper'>
+                                <p className='modal-input-label'>Outer diameter</p>
+                                <input pattern="^[0-9\.]*$" name="outerDia" type="text" autoComplete="off" required className="modal-input" defaultValue={tiltData === null ? "0" : tiltData.outerDia} />
+                            </div>
+
+                            <div className='modal-input-wrapper'>
+                                <p className='modal-input-label'>{`Pivot angle (degrees)`}</p>
+                                <input name="pivotAngle" type="text" pattern="^[0-9\.]*$" autoComplete="off" required className="modal-input" defaultValue={tiltData === null ? 0 : tiltData.pivotAngle} />
+                            </div>
+
+                            <div className='modal-input-wrapper'>
+                                <p className='modal-input-label'>{`Length of pad`}</p>
+                                <input name="lengthOfPad" type="text" pattern="^[0-9\.]*$" autoComplete="off" required className="modal-input" defaultValue={tiltData === null ? 0 : tiltData.lengthOfPad} />
+                            </div>
+                            <div className='modal-input-wrapper'>
+                                <p className='modal-input-label'>Quantity</p>
+                                <input name="qty" type="number" autoComplete="off" required className="modal-input" min={1} defaultValue={tiltData === null ? 1 : tiltData.qty} />
                             </div>
                             <button type="submit">Confirm <ArrowForwardOutlinedIcon /></button>
                         </form>
