@@ -16,9 +16,11 @@ import useFilledData from '../../../customHooks/useFilledData';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Button } from '@mui/material';
+import { useRef } from 'react'
+
 
 function Main() {
-
+    const firstItemRef = useRef(null);
     const dispatch = useDispatch();
     useUpdateSession();
     let cartRedux = useSelector((state) => state.cart.products);
@@ -179,11 +181,11 @@ function Main() {
                 <Nav />
                 <div className='landing-wrapper'>
                     <h1>Your Design <span>Configurator</span></h1>
-                    <a href='#products' style={{ color: "white", textDecoration: "none" }}><button>View Products</button></a>
+                    <button onClick={() => firstItemRef.current.scrollIntoView()}> View Products</button>
                     <img src={mainImg} className="main-image" />
 
                 </div>
-                <div className='landing-products' id="products">
+                <div className='landing-products' id="products" ref={firstItemRef}>
                     <h1 className='products-head'>Products</h1>
                     <div className='product-container'>
                         <div className='product-card'>

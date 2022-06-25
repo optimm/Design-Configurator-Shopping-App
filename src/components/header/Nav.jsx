@@ -4,7 +4,7 @@ import './nav.css';
 function Nav() {
     return (
         <div className='nav-wrapper'>
-            <p>McEnterPrices</p>
+            <p>McEnterPrises</p>
         </div>
     )
 }
