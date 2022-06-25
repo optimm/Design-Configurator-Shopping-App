@@ -6,6 +6,8 @@ import washerImg from "../../../images/washer.jpg"
 import springImg from "../../../images/spring.jpeg"
 import tiltImg from "../../../images/tilt.png"
 import ArrowForwardOutlinedIcon from '@mui/icons-material/ArrowForwardOutlined';
+import DeleteIcon from '@mui/icons-material/Delete';
+import UpdateIcon from '@mui/icons-material/Update';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setProduct, setRemoveProduct } from "../../../features/cart/cartSlice";
@@ -77,7 +79,12 @@ function Main() {
                             <div className='product-data'>
                                 <h1 className='product-name'>Helical Spring</h1>
                                 <p className='product-price'>Rs.200 /Piece</p>
-                                {!spring ? <button className='product-button' onClick={handleShowSpring}>Add to cart</button> : <button className='product-button' onClick={() => handleRemove("spring")}>Remove From Cart</button>}
+                                {!spring ? <button className='product-button' onClick={handleShowSpring}>Add to cart</button> :
+                                    <div className='product-button-group'>
+                                        <button className='product-button' onClick={() => handleRemove("spring")}><DeleteIcon /></button>
+                                        <button className='product-button' onClick={() => handleShowSpring("spring")}><UpdateIcon /></button>
+                                    </div>
+                                }
                             </div>
                         </div>
                         <div className='product-card'>

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { setUser } from './features/user/userSlice';
 import { setProduct } from "./features/cart/cartSlice";
-import Main from "./components/body/main/Main";
+// import Main from "./components/body/main/Main";
 import Login from "./components/body/login/Login";
 import Nav from './components/header/Nav';
 import Cart from './components/body/cart/Cart';
@@ -53,7 +53,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={(user.isAuthenticated ? (<><Main /></>) : (<Login />))} />
+        <Route path="/" element={<Login />} />
         <Route path="/cart" element={(user.isAuthenticated ? (<><Cart /></>) : (<Login />))} />
       </Routes>
     </BrowserRouter>
