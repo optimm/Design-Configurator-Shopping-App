@@ -1,14 +1,67 @@
+
 .main-image {
     height: 55vh;
     position: absolute;
     bottom: 0px;
     right: 0px;
+    animation: MoveLeftRight 10s linear infinite;
+}
+
+@keyframes MoveLeftRight {
+
+    0%,
+    100% {
+        right: 0px;
+    }
+
+    50% {
+        right: 8%;
+    }
 }
 
 .landing-wrapper {
     height: calc(100vh - 56px);
     width: 100%;
     overflow-x: hidden;
+}
+
+.landing-wrapper h1 {
+    position: absolute;
+    left: 5%;
+    top: 25%;
+    color: rgb(65, 65, 65);
+    /* width: 40%; */
+    font-weight: 800;
+    font-size: 60px;
+}
+
+.landing-wrapper h1 span {
+    color: #5e2bbb;
+}
+
+.landing-wrapper a {
+    position: absolute;
+    left: 5%;
+    top: 42%;
+}
+
+.landing-wrapper a button {
+    background-color: #5e2bbb;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 20px;
+    font-weight: 500;
+    width: 250px;
+    height: 60px;
+}
+
+.landing-wrapper a button:hover {
+    background-color: #3c108d;
 }
 
 .landing-products {

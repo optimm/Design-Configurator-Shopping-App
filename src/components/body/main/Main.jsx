@@ -15,6 +15,7 @@ import Modal from 'react-bootstrap/Modal';
 import useFilledData from '../../../customHooks/useFilledData';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { Button } from '@mui/material';
 
 function Main() {
 
@@ -177,12 +178,12 @@ function Main() {
             <div style={{ width: "100%", overflowX: "hidden" }}>
                 <Nav />
                 <div className='landing-wrapper'>
-
-
+                    <h1>Your Design <span>Configurator</span></h1>
+                    <a href='#products' style={{ color: "white", textDecoration: "none" }}><button>View Products</button></a>
                     <img src={mainImg} className="main-image" />
 
                 </div>
-                <div className='landing-products'>
+                <div className='landing-products' id="products">
                     <h1 className='products-head'>Products</h1>
                     <div className='product-container'>
                         <div className='product-card'>
