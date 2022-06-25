@@ -200,3 +200,10 @@
     margin-top: 30px !important;
     padding: 8px !important;
 }
+
+
+/* cart modal */
+
+.cart-modal {
+    background: rgb(0, 5, 45) !important;
+}

@@ -164,9 +164,9 @@ function Main() {
                             </div>
                         </div>
                     </div>
-                    <Link to="/cart" style={{ width: "18%", color: "white", textDecoration: "none" }}>
-                        <button className='cart-button'>Check Cart<ShoppingCartIcon /></button>
-                    </Link>
+                    <div style={{ width: "18%", color: "white", textDecoration: "none" }}>
+                        <button className='cart-button' onClick={() => setShow(true)}>Check Cart<ShoppingCartIcon /></button>
+                    </div>
 
                 </div>
                 <Modal show={showSpring} onHide={handleCloseSpring} className="data-modal">
@@ -277,11 +277,11 @@ function Main() {
 
 
                 {/* cart modal */}
-                <Modal show={show} fullscreen={fullscreen} onHide={() => setShow(false)}>
+                <Modal show={show} fullscreen={fullscreen} onHide={() => setShow(false)} >
                     <Modal.Header closeButton>
-                        <Modal.Title>Modal</Modal.Title>
+                        Cart
                     </Modal.Header>
-                    <Modal.Body>Modal body content</Modal.Body>
+                    <Modal.Body className="cart-modal">Modal body content</Modal.Body>
                 </Modal>
 
 
