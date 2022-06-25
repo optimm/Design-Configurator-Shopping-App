@@ -5,8 +5,8 @@ import { setUser } from './features/user/userSlice';
 import { setProduct } from "./features/cart/cartSlice";
 // import Main from "./components/body/main/Main";
 import Login from "./components/body/login/Login";
-import Nav from './components/header/Nav';
-import Cart from './components/body/cart/Cart';
+// import Nav from './components/header/Nav';
+// import Cart from './components/body/cart/Cart';
 
 
 
@@ -54,7 +54,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/cart" element={(user.isAuthenticated ? (<><Cart /></>) : (<Login />))} />
+        {/* <Route path="/cart" element={(user.isAuthenticated ? (<><Cart /></>) : (<Login />))} /> */}
       </Routes>
     </BrowserRouter>
 
