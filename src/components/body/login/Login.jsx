@@ -6,6 +6,7 @@ import "./login.css";
 import LoginIcon from '@mui/icons-material/Login';
 
 function Login() {
+    document.title = "Login";
     const [name, setName] = useState("");
     const [mobile, setMobile] = useState("");
     const [email, setEmail] = useState("");

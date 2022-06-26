@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { clearUser } from '../../../features/user/userSlice';
 import "./summary.css"
 function Summary() {
+    document.title = "Summary";
+
     const navigate = useNavigate();
     const dispatch = useDispatch();
     useEffect(() => {

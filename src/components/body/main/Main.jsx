@@ -22,6 +22,7 @@ import { createNotification } from "../../../Notification";
 
 
 function Main() {
+
     const navigate = useNavigate();
     useEffect(() => {
         let confirmed = sessionStorage.getItem('confirmed');
@@ -187,6 +188,15 @@ function Main() {
 
     // const [fullscreen, setFullscreen] = useState(true);
     const [show, setShow] = useState(false);
+    useEffect(() => {
+        if (!show) {
+            document.title = "Products";
+        }
+        else {
+            document.title = "Cart";
+        }
+    }, [show])
+
 
 
 
