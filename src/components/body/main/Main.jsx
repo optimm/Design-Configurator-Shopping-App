@@ -9,7 +9,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import UpdateIcon from '@mui/icons-material/Update';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { setProduct, setRemoveProduct } from "../../../features/cart/cartSlice";
+import { setEmpty, setProduct, setRemoveProduct } from "../../../features/cart/cartSlice";
 import useUpdateSession from '../../../customHooks/useUpdateSession';
 import Modal from 'react-bootstrap/Modal';
 import useFilledData from '../../../customHooks/useFilledData';
@@ -181,8 +181,12 @@ function Main() {
         let data = { customer: user, products: cartRedux };
         addDoc(collectionRef, data).then((res) => {
             console.log("Work is Done", res.id);
+            dispatch(setEmpty());
+
+
         }).catch((err) => {
             console.log("Error Caused", err);
+            createNotification("Sorry Some Error Was Caused, Try Again Later", "error", 2000);
         });
 
     }
