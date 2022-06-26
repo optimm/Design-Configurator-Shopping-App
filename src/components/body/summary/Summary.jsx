@@ -25,7 +25,7 @@ function Summary() {
     return (
         <div className='summary'>
             <h1>Thank you for your order, we'll get back to you soon</h1>
-            <button className="exit-button">Exit</button>
+            <button onClick={handleClean} className="exit-button">Exit</button>
         </div>
     )
 }

@@ -101,6 +101,9 @@ function Main() {
         else if (name === "quantity") {
 
         }
+        else if (name === "noOfActiveCoils") {
+
+        }
         else {
             val += " mm";
         }
