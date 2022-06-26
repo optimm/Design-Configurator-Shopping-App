@@ -193,7 +193,7 @@ function Main() {
             console.log("Work is Done", res.id);
             sessionStorage.setItem('confirmed', true);
             dispatch(setEmpty());
-            navigate("/");
+            navigate("/summary");
 
         }).catch((err) => {
             console.log("Error Caused", err);
