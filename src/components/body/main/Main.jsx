@@ -15,8 +15,9 @@ import Modal from 'react-bootstrap/Modal';
 import useFilledData from '../../../customHooks/useFilledData';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import { Button } from '@mui/material';
 import { useRef } from 'react'
+import { db } from '../../../lib/init-firebase';
+import { addDoc, collection } from 'firebase/firestore';
 
 
 function Main() {
@@ -24,6 +25,7 @@ function Main() {
     const dispatch = useDispatch();
     useUpdateSession();
     let cartRedux = useSelector((state) => state.cart.products);
+    let user = useSelector((state) => state.user.user);
     let keys = useSelector((state) => Object.keys(state.cart.products));
     let isEmpty = useSelector((state) => Object.keys(state.cart.products).length === 0);
     const { spring, washer, tiltPad } = cartRedux;
@@ -98,7 +100,6 @@ function Main() {
             let val = getVal(it, obj[it]);
             return (<p>{`${name} : ${val}`}</p>)
         })}</>)
-        return null;
     }
 
 
@@ -171,6 +172,13 @@ function Main() {
 
 
     function confirmOrder() {
+        const collectionRef = collection(db, 'orders');
+        let data = { customer: user, products: cartRedux };
+        addDoc(collectionRef, { order: "baua" }).then((res) => {
+            console.log("Work is Done", res.id);
+        }).catch((err) => {
+            console.log("Error Caused", err);
+        });
 
     }
 
@@ -375,7 +383,7 @@ function Main() {
                         {
                             !isEmpty ? <div className='confirmation'>
                                 <p>Order value - Rs. {getOrderValue(keys, cartRedux)}</p>
-                                <button disabled={isEmpty}>Confirm Order</button>
+                                <button disabled={isEmpty} onClick={confirmOrder}>Confirm Order</button>
                             </div> : <img src="https://media4.giphy.com/media/9fAh7MfgrslSjg1Jk4/giphy.gif?cid=ecf05e471fyzg9b1qa5t4qx2txzcao80f9yt0a5fa0mu6z8j&rid=giphy.gif&ct=s" alt="empty icon" className="empty-icon" />
                         }
                     </Modal.Body>
