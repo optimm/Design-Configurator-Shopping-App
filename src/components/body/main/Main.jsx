@@ -379,33 +379,36 @@ function Main() {
                             <h1>Cart</h1>
                             <button className="back-button" onClick={() => setShow(false)}>Back</button>
                         </div>
-                        <div className='cart-items'>
-                            {keys.length > 0 && keys.map((item) => {
-                                let itemData = cartRedux[item];
-                                let im = getImg(item);
-                                let itemkeys = Object.keys(itemData);
+                        <div className='cart-body'>
+                            {
+                                !isEmpty ? <div className='confirmation'>
+                                    <p>Order value - Rs. {getOrderValue(keys, cartRedux)}</p>
+                                    <button disabled={isEmpty} onClick={confirmOrder}>Confirm Order</button>
+                                </div> : <img src="https://media4.giphy.com/media/9fAh7MfgrslSjg1Jk4/giphy.gif?cid=ecf05e471fyzg9b1qa5t4qx2txzcao80f9yt0a5fa0mu6z8j&rid=giphy.gif&ct=s" alt="empty icon" className="empty-icon" />
+                            }
 
-                                return (
-                                    < div className='cart-item-card'>
-                                        <div className='product-image'><img src={im} className="product-image-content" /></div>
-                                        <div className='cart-item-data'>
+                            <div className='cart-items'>
+                                {keys.length > 0 && keys.map((item) => {
+                                    let itemData = cartRedux[item];
+                                    let itemkeys = Object.keys(itemData);
+
+                                    return (
+                                        < div className='cart-item-card'>
                                             <h2>{getName(item)}</h2>
                                             <div className='cart-content'>
                                                 {itemkeys.length > 0 && <Giveps arr={itemkeys} obj={itemData} />}
                                             </div>
-                                        </div>
-                                    </div>
-                                )
-                            })
 
-                            }
+                                        </div>
+                                    )
+                                })
+
+                                }
+                            </div>
+
+
                         </div>
-                        {
-                            !isEmpty ? <div className='confirmation'>
-                                <p>Order value - Rs. {getOrderValue(keys, cartRedux)}</p>
-                                <button disabled={isEmpty} onClick={confirmOrder}>Confirm Order</button>
-                            </div> : <img src="https://media4.giphy.com/media/9fAh7MfgrslSjg1Jk4/giphy.gif?cid=ecf05e471fyzg9b1qa5t4qx2txzcao80f9yt0a5fa0mu6z8j&rid=giphy.gif&ct=s" alt="empty icon" className="empty-icon" />
-                        }
+
                     </Modal.Body>
                 </Modal>
 
