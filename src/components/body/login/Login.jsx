@@ -39,8 +39,8 @@ function Login() {
                     <h1>Welcome to <span>McEnterPrises</span></h1>
                     <form className="login-form" autoComplete="off" onSubmit={handleSubmit}>
                         <input type="text" autoComplete="off" required placeholder="Enter your name" className="form-input" onChange={(e) => setName(e.target.value)} />
-                        <input type="text" pattern="\d*" autoComplete="off" required placeholder="Enter your mobile no." className="form-input" minLength={10} maxLength={10} onChange={(e) => setMobile(e.target.value)} />
-                        <input type="email" autoComplete="off" required placeholder="Enter your email" className="form-input" onChange={(e) => setEmail(e.target.value)} />
+                        <input type="text" pattern="[1-9]{1}[0-9]{9}" title="Please enter a valid 10 digit phone number" autoComplete="off" required placeholder="Enter your mobile no." className="form-input" maxLength={10} onChange={(e) => setMobile(e.target.value)} />
+                        <input type="email" autoComplete="off" title="Please enter a valid email id" required placeholder="Enter your email" className="form-input" onChange={(e) => setEmail(e.target.value)} />
                         <button type="submit">Get In <LoginIcon /></button>
                     </form>
                 </div>

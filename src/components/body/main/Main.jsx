@@ -18,6 +18,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { useRef } from 'react'
 import { db } from '../../../lib/init-firebase';
 import { addDoc, collection } from 'firebase/firestore';
+import { createNotification } from "../../../Notification";
 
 
 function Main() {
@@ -42,6 +43,7 @@ function Main() {
 
     function handleRemove(productName) {
         dispatch(setRemoveProduct(productName));
+        createNotification(`${getName(productName)} Removed From Cart`, "error", 1500);
     }
 
     function getName(productName) {
@@ -119,6 +121,7 @@ function Main() {
         console.log("new data lele bhai spring ka", data);
         const productName = "spring";
         dispatch(setProduct({ productName, data }));
+        createNotification(`Helical Spring Added To Cart`, "success", 1500);
         setTimeout(() => {
             handleCloseSpring();
         }, 100);
@@ -138,6 +141,7 @@ function Main() {
         console.log("new data lele bhai washer ka", data);
         const productName = "washer";
         dispatch(setProduct({ productName, data }));
+        createNotification(`Washer Added To Cart`, "success", 1500);
         setTimeout(() => {
             handleCloseWasher();
         }, 100);
@@ -158,6 +162,7 @@ function Main() {
         console.log("new data lele bhai tilt ka", data);
         const productName = "tiltPad";
         dispatch(setProduct({ productName, data }));
+        createNotification(`Tilt Pad Added To Cart`, "success", 1500);
         setTimeout(() => {
             handleCloseTilt();
         }, 100);
@@ -174,7 +179,7 @@ function Main() {
     function confirmOrder() {
         const collectionRef = collection(db, 'orders');
         let data = { customer: user, products: cartRedux };
-        addDoc(collectionRef, { order: "baua" }).then((res) => {
+        addDoc(collectionRef, data).then((res) => {
             console.log("Work is Done", res.id);
         }).catch((err) => {
             console.log("Error Caused", err);

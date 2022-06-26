@@ -5,6 +5,7 @@ import { setUser } from './features/user/userSlice';
 import { setProduct } from "./features/cart/cartSlice";
 import Main from "./components/body/main/Main";
 import Login from "./components/body/login/Login";
+import { Notification } from "./Notification";
 // import Nav from './components/header/Nav';
 // import Cart from './components/body/cart/Cart';
 
@@ -51,12 +52,16 @@ function App() {
   const user = useSelector((state) => state.user);
   // console.log(user);
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={(user.isAuthenticated ? (<><Main /></>) : (<Login />))} />
-        {/* <Route path="/cart" element={(user.isAuthenticated ? (<><Cart /></>) : (<Login />))} /> */}
-      </Routes>
-    </BrowserRouter>
+    <div className='App'>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={(user.isAuthenticated ? (<><Main /></>) : (<Login />))} />
+          {/* <Route path="/cart" element={(user.isAuthenticated ? (<><Cart /></>) : (<Login />))} /> */}
+        </Routes>
+      </BrowserRouter>
+      <Notification />
+    </div>
+
 
   );
 }
