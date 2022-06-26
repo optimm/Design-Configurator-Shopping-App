@@ -185,7 +185,7 @@ function Main() {
 
     //for cart
 
-    const [fullscreen, setFullscreen] = useState(true);
+    // const [fullscreen, setFullscreen] = useState(true);
     const [show, setShow] = useState(false);
 
 
@@ -214,14 +214,14 @@ function Main() {
                 <div className='landing-wrapper'>
                     <h1>Your Design <span>Configurator</span></h1>
                     <button onClick={() => firstItemRef.current.scrollIntoView()}> View Products</button>
-                    <img src={mainImg} className="main-image" />
+                    <img alt="mcenterprisesimg" src={mainImg} className="main-image" />
 
                 </div>
                 <div className='landing-products' id="products" ref={firstItemRef}>
                     <h1 className='products-head'>Products</h1>
                     <div className='product-container'>
                         <div className='product-card'>
-                            <div className='product-image'><img src={springImg} className="product-image-content" /></div>
+                            <div className='product-image'><img alt="mcenterprisesimg" src={springImg} className="product-image-content" /></div>
                             <div className='product-data'>
                                 <h1 className='product-name'>Helical Spring</h1>
                                 <p className='product-price'>Rs.200 /Piece</p>
@@ -234,7 +234,7 @@ function Main() {
                             </div>
                         </div>
                         <div className='product-card'>
-                            <div className='product-image'><img src={washerImg} className="product-image-content" /></div>
+                            <div className='product-image'><img alt="mcenterprisesimg" src={washerImg} className="product-image-content" /></div>
                             <div className='product-data'>
                                 <h1 className='product-name'>Washer</h1>
                                 <p className='product-price'>Rs.20 /10 Pieces</p>
@@ -249,7 +249,7 @@ function Main() {
                         </div>
                         <div className='product-card'>
                             <div className='product-image'>
-                                <img src={tiltImg} className="product-image-content" />
+                                <img alt="mcenterprisesimg" src={tiltImg} className="product-image-content" />
                             </div>
                             <div className='product-data'>
                                 <h1 className='product-name'>Tilt Pad</h1>
@@ -377,7 +377,7 @@ function Main() {
 
 
                 {/* cart modal */}
-                <Modal show={show} fullscreen={fullscreen} onHide={() => setShow(false)} >
+                <Modal show={show} fullscreen={true} onHide={() => setShow(false)} >
                     <Modal.Body className="cart-modal">
                         <div className='cart-head'>
                             <h1>Cart</h1>
