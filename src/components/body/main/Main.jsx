@@ -7,7 +7,7 @@ import springImg from "../../../images/spring.jpeg"
 import tiltImg from "../../../images/tilt.png"
 import DeleteIcon from '@mui/icons-material/Delete';
 import UpdateIcon from '@mui/icons-material/Update';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setEmpty, setProduct, setRemoveProduct } from "../../../features/cart/cartSlice";
 import useUpdateSession from '../../../customHooks/useUpdateSession';
@@ -58,17 +58,17 @@ function Main() {
 
     function getName(productName) {
         if (productName === "spring") return "Helical Spring";
-        if (productName == "washer") return "Washer";
+        if (productName === "washer") return "Washer";
         if (productName === "tiltPad") return "Tilt Pad";
     }
-    function getImg(productName) {
-        if (productName === "spring") return springImg;
-        if (productName == "washer") return washerImg;
-        if (productName === "tiltPad") return tiltImg;
-    }
+    // function getImg(productName) {
+    //     if (productName === "spring") return springImg;
+    //     if (productName === "washer") return washerImg;
+    //     if (productName === "tiltPad") return tiltImg;
+    // }
     function getPrice(productName) {
         if (productName === "spring") return 200;
-        if (productName == "washer") return 2;
+        if (productName === "washer") return 2;
         if (productName === "tiltPad") return 1000;
     }
     function getUpper(str) {
@@ -80,12 +80,13 @@ function Main() {
         let total = 0;
         arr.map((item) => {
             total += (parseInt(getPrice(item))) * (parseInt(obj[item].quantity));
+            return null;
         })
         return total;
     }
 
     function getVal(name, val) {
-        if (val.indexOf('.') != -1) {
+        if (val.indexOf('.') !== -1) {
             val = parseFloat(val);
             val = val.toFixed(2);
             val = val.toString();
@@ -110,10 +111,10 @@ function Main() {
         return val;
     }
     function Giveps({ arr, obj }) {
-        return (<>{arr.map((it) => {
+        return (<>{arr.map((it, index) => {
             let name = getUpper(it);
             let val = getVal(it, obj[it]);
-            return (<p>{`${name} : ${val}`}</p>)
+            return (<p key={index}>{`${name} : ${val}`}</p>)
         })}</>)
     }
 
@@ -391,12 +392,12 @@ function Main() {
                             }
 
                             <div className='cart-items'>
-                                {keys.length > 0 && keys.map((item) => {
+                                {keys.length > 0 && keys.map((item, index) => {
                                     let itemData = cartRedux[item];
                                     let itemkeys = Object.keys(itemData);
 
                                     return (
-                                        < div className='cart-item-card'>
+                                        < div className='cart-item-card' key={index}>
                                             <h2>{getName(item)}</h2>
                                             <div className='cart-content'>
                                                 {itemkeys.length > 0 && <Giveps arr={itemkeys} obj={itemData} />}

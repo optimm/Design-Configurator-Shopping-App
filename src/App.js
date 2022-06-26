@@ -23,6 +23,7 @@ function App() {
         cart.map((item) => {
           const { productName, data } = item;
           dispatch(setProduct({ productName, data }));
+          return null;
         })
         sessionStorage.setItem('isempty', false);
       }

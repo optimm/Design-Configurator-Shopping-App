@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useSelector } from 'react-redux';
 
 function useFilledData(productName) {
@@ -12,6 +12,7 @@ function useFilledData(productName) {
                     if (item.productName === productName) {
                         data = item.data;
                     }
+                    return null;
                 })
             }
         }

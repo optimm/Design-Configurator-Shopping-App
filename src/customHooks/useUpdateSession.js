@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { setEmpty } from "../features/cart/cartSlice";
 
@@ -11,6 +11,7 @@ function useUpdateSession() {
         const arr = []
         keys.map((item) => {
             arr.push({ productName: item, data: cartRedux[item] });
+            return null;
         })
         if (arr.length > 0) {
             sessionStorage.setItem('cart', JSON.stringify(arr));
