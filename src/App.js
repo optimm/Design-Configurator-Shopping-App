@@ -5,6 +5,7 @@ import { setUser } from './features/user/userSlice';
 import { setProduct } from "./features/cart/cartSlice";
 import Main from "./components/body/main/Main";
 import Login from "./components/body/login/Login";
+import Summary from './components/body/summary/Summary';
 import { Notification } from "./Notification";
 
 
@@ -53,7 +54,9 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={(user.isAuthenticated ? (<><Main /></>) : (<Login />))} />
-          {/* <Route path="/cart" element={(user.isAuthenticated ? (<><Cart /></>) : (<Login />))} /> */}
+          {/* <Route path="/cart" element={(user.isAuthenticated ? (<><Cart /></>) : (<Login />))} />
+           */}
+          <Route path="/summary" element={<Summary />} />
         </Routes>
       </BrowserRouter>
       <Notification />

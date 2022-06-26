@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Nav from '../../header/Nav'
 import "./main.css";
 import mainImg from "../../../images/main.png";
@@ -7,7 +7,7 @@ import springImg from "../../../images/spring.jpeg"
 import tiltImg from "../../../images/tilt.png"
 import DeleteIcon from '@mui/icons-material/Delete';
 import UpdateIcon from '@mui/icons-material/Update';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setEmpty, setProduct, setRemoveProduct } from "../../../features/cart/cartSlice";
 import useUpdateSession from '../../../customHooks/useUpdateSession';
@@ -22,6 +22,16 @@ import { createNotification } from "../../../Notification";
 
 
 function Main() {
+    const navigate = useNavigate();
+    useEffect(() => {
+        let confirmed = sessionStorage.getItem('confirmed');
+        confirmed = Boolean(confirmed);
+        console.log("confirmm", confirmed);
+        if (confirmed === true)
+            navigate("/summary");
+    }, [])
+
+
     const firstItemRef = useRef(null);
     const dispatch = useDispatch();
     useUpdateSession();
@@ -181,8 +191,9 @@ function Main() {
         let data = { customer: user, products: cartRedux };
         addDoc(collectionRef, data).then((res) => {
             console.log("Work is Done", res.id);
+            sessionStorage.setItem('confirmed', true);
             dispatch(setEmpty());
-
+            navigate("/");
 
         }).catch((err) => {
             console.log("Error Caused", err);
